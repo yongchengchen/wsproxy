@@ -1,0 +1,38 @@
+# Logger configurations.
+localmode: true
+
+listenon: 192.168.1.159:7788
+proxytohost: python.local.test
+proxytopath: /pub/chat
+#chkregtime milliseconds
+chkregtime: 500
+
+logger:
+    path: "/tmp/log/wssshjumper"
+    level: "all"
+    stdout: true
+
+redis:
+  default:
+    address: 127.0.0.1:6379
+    db: 0
+
+
+database:
+  default:
+    link: "mysql:root:root@tcp(127.0.0.1:3306)/dbname"
+    debug: true
+    # 数据库日志对象配置
+    logger:
+        Path: "/tmp/log/wssshjumper/sql"
+        Level:  "all"
+        Stdout: true
+  sqlite:
+    type: "sqlite3"
+    link: "path_to/sqlite.db"
+    debug: true
+    # 数据库日志对象配置
+    logger:
+        Path: "/tmp/log/wsproxy"
+        Level:  "all"
+        Stdout: true
