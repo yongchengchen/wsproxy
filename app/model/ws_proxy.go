@@ -55,9 +55,9 @@ func (sws *LogicWsProxySession) proxyUpWsMsg(exitCh chan bool) {
 		}
 
 		err = sws.toWsConn.WriteMessage(mt, wsData)
-		logrus.Println("proxy message to uplevel:", string(wsData))
+		logrus.Debugln("proxy message to uplevel:", string(wsData))
 		if err != nil {
-			logrus.Println("proxy message to uplevel:", err)
+			logrus.WithError(err).Error("proxy message to uplevel:")
 			return
 		}
 	}
@@ -76,14 +76,14 @@ func (sws *LogicWsProxySession) proxyDownWsMsg(exitCh chan bool) {
 			return
 		}
 		if string(wsData) == "==ping==" {
-			logrus.Println("==ping==")
+			logrus.Debugln("==ping==")
 			continue
 		}
 
 		err = sws.fromWsConn.WriteMessage(mt, wsData)
-		logrus.Println("proxy message to device:", string(wsData))
+		logrus.Debugln("proxy message to device:", string(wsData))
 		if err != nil {
-			logrus.Println("proxy message to device:", err)
+			logrus.WithError(err).Error("proxy message to device")
 			return
 		}
 	}
